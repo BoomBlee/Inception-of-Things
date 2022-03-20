@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-project
+  namespace: argocd
+spec:
+  # Project description
+  description: Example Project
+
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+  - '*'
+
+  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  destinations:
+  - namespace: dev
+    server: https://kubernetes.default.svc
+
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: false
